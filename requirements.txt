@@ -1,4 +1,5 @@
 fastapi
 pytest
 uvicorn
-requests
+httpx
+pandas
