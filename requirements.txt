@@ -1,5 +1,6 @@
-fastapi
-pytest
-uvicorn
-httpx
-pandas
+fastapi==0.100.0
+uvicorn==0.23.0
+requests==2.31.0
+pandas==2.1.1
+pytest==9.0.2
+httpx==0.24.1

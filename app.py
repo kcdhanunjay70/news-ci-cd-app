@@ -1,17 +1,19 @@
+# app.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-app = FastAPI(title="CI/CD Render Demo")
+app = FastAPI()
 
-class TextInput(BaseModel):
+class Message(BaseModel):
     text: str
 
-@app.get("/")
-def home():
-    return {"message": "CI/CD Pipeline Working on Render 🚀"}
+def is_spam(text: str) -> bool:
+    spam_keywords = ["free", "win", "lottery", "congratulations"]
+    return any(word.lower() in text.lower() for word in spam_keywords)
 
 @app.post("/predict")
-def predict(data: TextInput):
-    if "spam" in data.text.lower():
+def predict(message: Message):
+    if is_spam(message.text):
         return {"prediction": "Spam"}
-    return {"prediction": "Not Spam"}
+    else:
+        return {"prediction": "Not Spam"}
