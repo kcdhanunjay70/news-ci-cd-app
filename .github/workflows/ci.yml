@@ -26,6 +26,3 @@ jobs:
 
       - name: Run tests
         run: python -m pytest tests/
-
-      - name: Run app
-        run: python -m app  # ✅ Use -m to run Python module (optional)
