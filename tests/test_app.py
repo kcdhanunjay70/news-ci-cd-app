@@ -4,16 +4,12 @@ from app import app
 
 client = TestClient(app)
 
-def test_prediction_spam():
-    data = {"text": "Congratulations! You won a free lottery ticket!"}
-    response = client.post("/predict", json=data)
-    
+def test_predict_spam():
+    response = client.post("/predict", json={"text": "You won a free lottery"})
     assert response.status_code == 200
-    assert response.json()["prediction"] == "Spam"
+    assert response.json() == {"prediction": "Spam"}
 
-def test_prediction_ham():
-    data = {"text": "Hey, are we meeting tomorrow for lunch?"}
-    response = client.post("/predict", json=data)
-    
+def test_predict_not_spam():
+    response = client.post("/predict", json={"text": "Hello friend"})
     assert response.status_code == 200
-    assert response.json()["prediction"] == "Not Spam"
+    assert response.json() == {"prediction": "Not Spam"}
